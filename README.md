@@ -21,7 +21,7 @@ Boocock et al (2023).
 Before installation of this user project you will first need to
 download and install a version of
 [Chaste](https://github.com/Chaste/Chaste). Simulations in Boocock et
-al (2023) were run and tested for [Chaste
+al (2023) were performed using [Chaste
 2019.1](https://github.com/Chaste/Chaste/tree/release_2019.1) and
 [Chaste 2021.1](https://github.com/Chaste/Chaste/tree/release_2021.1)
 (recommended).
@@ -47,8 +47,9 @@ cell\_based component. To speed up simulations change
 The "python" directory within the cloned repository contains a Python
 script for specifying combinations of parameter values and launching
 parralel simulations. Copy or move this directory to a convenient
-location modify "batch\_erk\_propulsion\_no\_alignment.py" to point to
-the location of the compiled C++ executable in your build (default
+location and modify "batch\_erk\_propulsion\_no\_alignment.py" to
+point to the location of the compiled C++ executable in your build
+(default
 "~/chaste\_build/projects/erk\_waves/test/TestERKWaveWithSelfPropulsionNoAlignment").
 
 To run:
@@ -60,18 +61,18 @@ environment variable "CHASTE\_TEST\_OUTPUT" which you may set as
 desired. The output directory includes a file "params.txt" documenting
 parameter values as well as a csv file
 "results\_from\_time\_xxxx/cell\_data.dat" containing simulation data
-(the data to save is specified in the module
-ErkPropulsionWriterNoAlignment). Within each row of "cell\_data.dat"
-the first column gives the simulation timepoint, then columns repeat
-in blocks of 8 containing the following information for each cell:
+(the data to save is specified in the ErkPropulsionWriterNoAlignment
+class). Within each row of "cell\_data.dat" the first column gives the
+simulation timepoint, then columns repeat in blocks of 8 containing
+the following information for each cell:
 
-    "location_index"    # Redundant with cell_id
-    "cell_id"    # Unique cell identifier
-	"x", "y"    # Cell centroid location
-    "erk"    # ERK level
-    "A0"    # Target area
-    "A"    # Cell area
-    "theta"    # Angle of self-propulsion
+    location_index    # Redundant with cell_id
+    cell_id    # Unique cell identifier
+	x, y    # Cell centroid location
+    erk    # ERK level
+    A0    # Target area
+    A    # Cell area
+    theta    # Angle of self-propulsion
 
 Simulations can be visualized using
 [Paraview](https://www.paraview.org/download/): open Paraview and

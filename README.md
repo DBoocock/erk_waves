@@ -26,7 +26,19 @@ al (2023) were performed using [Chaste
 [Chaste 2021.1](https://github.com/Chaste/Chaste/tree/release_2021.1)
 (recommended).
 
+There are various ways of [obtaining
+Chaste](https://chaste.cs.ox.ac.uk/trac/wiki/GettingStarted). You can
+clone from the [Chaste github
+repository](https://github.com/Chaste/Chaste) and change branch to a
+specific release using commands such as:
+
+    git clone https://github.com/Chaste/Chaste.git
     git checkout release_2021.1
+	
+Chaste provides instructions to [install
+dependencies](https://chaste.cs.ox.ac.uk/trac/wiki/InstallGuides/InstallGuide)
+and for [first time configuration and
+build](https://chaste.cs.ox.ac.uk/trac/wiki/ChasteGuides/CmakeFirstRun).
 
 Once you have a working installation of Chaste, clone the erk\_waves
 repository to the user projects directory and compile following the
@@ -39,9 +51,9 @@ cell\_based component. To speed up simulations change
     cd Chaste/projects
 	git clone https://github.com/DBoocock/erk_waves.git
 	cd erk_waves
-	python setup.py
-	cd path/to/chaste_build
-	ccmake path/to/Chaste
+	python setup_project.py
+	cd path/to/chaste_build    # e.g. cd ~/home/chaste_build
+	ccmake path/to/Chaste    # e.g. ccmake ~/home/Chaste
 	make TestERKWaveWithSelfPropulsionNoAlignment
 
 The "python" directory within the cloned repository contains a Python

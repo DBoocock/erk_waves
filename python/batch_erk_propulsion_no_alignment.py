@@ -43,7 +43,10 @@ if __name__ == "__main__":
     # location or your own installation)
     executable = Path(Path.home(), "chaste_build/projects/erk_waves/test", "TestERKWaveWithSelfPropulsionNoAlignment")
 
-    # Specify a root directory (or stem) for simulation output
+    # Specify a root directory (or stem) for simulation output. This
+    # will appear within the directory specified by the environment
+    # variable "CHASTE_TEST_OUTPUT" and contain output from the
+    # simulations launched in this script.
     outdir_stem = "erk_waves_output/"
 
     # Specify the parameters used to label the output directory (a

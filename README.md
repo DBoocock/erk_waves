@@ -87,7 +87,7 @@ the following information for each cell:
     theta    # Angle of self-propulsion
 
 Simulations can be visualized using
-[Paraview](https://www.paraview.org/download/): open Paraview and
+[ParaView](https://www.paraview.org/download/): open ParaView and
 simply import the pvd file from the location
 "results\_from\_time\_xxxx/results.pvd" (consult the [Chaste
 Tutorials](https://chaste.cs.ox.ac.uk/chaste/tutorials/release_2021.1/UserTutorials.html)

@@ -201,8 +201,7 @@ public:
       bool check_for_internal_intersections = CommandLineArguments::Instance()->GetIntCorrespondingToOption("-check_for_internal_intersections");
 
       // Save all parameters to file.
-      std::string outdirpath = getenv("CHASTE_TEST_OUTPUT") + outdir;
-      // std::string outdirpath = "/media/ssd/chaste_output/" + outdir;
+      std::string outdirpath = std::string(getenv("CHASTE_TEST_OUTPUT")) + "/" + outdir;
       boost::filesystem::create_directories(outdirpath);
       std::string outpath = outdirpath + "/params.txt";
       std::ofstream myfile;

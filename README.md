@@ -27,15 +27,16 @@ al (2023) were performed using [Chaste
 (recommended).
 
 There are various ways of [obtaining
-Chaste](https://chaste.cs.ox.ac.uk/trac/wiki/GettingStarted). You can
-clone from the [Chaste github
+Chaste](https://chaste.cs.ox.ac.uk/trac/wiki/GettingStarted). One
+method is to clone from the [Chaste github
 repository](https://github.com/Chaste/Chaste) and change branch to a
-specific release using commands such as:
+specific release:
 
     git clone https://github.com/Chaste/Chaste.git
+	cd Chaste
     git checkout release_2021.1
 	
-Chaste provides instructions to [install
+You then need to follow instructions to [install
 dependencies](https://chaste.cs.ox.ac.uk/trac/wiki/InstallGuides/InstallGuide)
 and for [first time configuration and
 build](https://chaste.cs.ox.ac.uk/trac/wiki/ChasteGuides/CmakeFirstRun).

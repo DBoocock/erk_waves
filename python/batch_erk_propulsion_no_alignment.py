@@ -39,9 +39,12 @@ if __name__ == "__main__":
     from multiprocessing import Pool
     from pathlib import Path
 
-    # Path to executable within Chaste build (rename to specify the
-    # location or your own installation)
-    executable = Path(Path.home(), "chaste_build/projects/erk_waves/test", "TestERKWaveWithSelfPropulsionNoAlignment")
+    # Path to executable within chaste_build (You may need to change
+    # this line to specify the path to the executable on your own
+    # system)
+    executable1 = Path(*Path.cwd().parts[:-4],
+                      "chaste_build/projects/erk_waves/test",
+                      "TestERKWaveWithSelfPropulsionNoAlignment")
 
     # Specify a root directory (or stem) for simulation output. This
     # will appear within the directory specified by the environment

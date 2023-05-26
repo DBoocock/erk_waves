@@ -95,5 +95,7 @@ Tutorials](https://chaste.cs.ox.ac.uk/chaste/tutorials/release_2021.1/UserTutori
 for further information).
 
 The analysis of simulation output published in Boocock et al (2023)
-was performed using a suite of Python scripts and modules available
-through a separate repository (see [name of repo]()).
+was performed using a suite of Python scripts and modules that are
+being made available with data through the following [download
+link](https://seafile.ist.ac.at/f/27d1b1a98ab547a19603/?dl=1) (810MB
+download).

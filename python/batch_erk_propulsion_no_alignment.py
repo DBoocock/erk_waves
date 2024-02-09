@@ -42,7 +42,7 @@ if __name__ == "__main__":
     # Path to executable within chaste_build (You may need to change
     # this line to specify the path to the executable on your own
     # system)
-    executable1 = Path(*Path.cwd().parts[:-4],
+    executable = Path(*Path.cwd().parts[:-4],
                       "chaste_build/projects/erk_waves/test",
                       "TestERKWaveWithSelfPropulsionNoAlignment")
 

@@ -42,9 +42,11 @@ if __name__ == "__main__":
     # Path to executable within chaste_build (You may need to change
     # this line to specify the path to the executable on your own
     # system)
-    executable = Path(*Path.cwd().parts[:-4],
-                      "chaste_build/projects/erk_waves/test",
-                      "TestERKWaveWithSelfPropulsionNoAlignment")
+    # executable = Path(*Path.cwd().parts[:-4],
+    #                   "chaste_build/projects/erk_waves/test",
+    #                   "TestERKWaveWithSelfPropulsionNoAlignment")
+    # For Docker installation
+    executable = Path("/home/chaste/lib/projects/erk_waves/test/TestERKWaveWithSelfPropulsionNoAlignment")
 
     # Specify a root directory (or stem) for simulation output. This
     # will appear within the directory specified by the environment

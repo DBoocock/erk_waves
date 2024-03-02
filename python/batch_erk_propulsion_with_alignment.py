@@ -83,10 +83,10 @@ if __name__ == "__main__":
 
         # Timescale associated with changes in preferred perimeter
         "-taul": 20.0,    # Non-dimensionalized by tauE=6min (timescale of ERK)
-        # Persistence timescale of persistent random walk
-        "-tau_p": 5.0,    # non-dimensionalized by tauE (30mins if tauE=6min)
-        # Timescale for neighbour alignment of polarity
-        "-tau_a": 5.0,    # TODO: Set alignement paramter
+        # Persistence timescale of persistent random walk (set as np.inf to remove effect)
+        # "-tau_p": 5.0,    # non-dimensionalized by tauE (30mins if tauE=6min)
+        # Timescale for neighbour alignment of polarity (set as np.inf to remove effect)
+        # "-tau_a": 5.0,    
         
         # Area and perimeter elasticity. Ratio of KA/KP taken from
         # Henkes et al NatCom (2020) (same as used in Saraswathibhatla
@@ -104,7 +104,8 @@ if __name__ == "__main__":
         "-check_for_internal_intersections": 0,
 
         # Self-propulsion force magnitude (or rather F0/\zeta, i.e. scaled by friction)
-        "-F0": 0.15,
+        # "-F0": 0.15,
+        "-F0": 0.15,    # Smaller force when testing alignment and persistence
         # Ratio of mechanochemical coupling strengths alpha/beta
         "-ab_ratio": 18.5,
         # Magnitude of mechanochemical coupling strength alpha*beta as
@@ -119,16 +120,22 @@ if __name__ == "__main__":
     tau_e = 1.0
     # Specify the length of the burn-in period (in terms of the
     # predicted period of oscillation)
-    const_arg_dict["-end_time"] = np.round(100*calc_period(tau_e, const_arg_dict["-taul"]))
+    # const_arg_dict["-end_time"] = np.round(100*calc_period(tau_e, const_arg_dict["-taul"]))
+    const_arg_dict["-end_time"] = dt
     # Specify the length of the data capture period (in terms of the
     # predicted period of oscillation)
+    # const_arg_dict["-bonus_time"] = np.round(10*calc_period(tau_e, const_arg_dict["-taul"]))
     const_arg_dict["-bonus_time"] = np.round(10*calc_period(tau_e, const_arg_dict["-taul"]))
     # Specify a sampling interval for the data capture period
     const_arg_dict["-sampling_timestep_multiple"] = 5*int(0.1/dt)
 
+    print("End Time:", const_arg_dict["-bonus_time"])
+    
     # Parameter lists within this dictionary are paired by index,
     # i.e. p1[i] with p2[i]. Lists should be of the same length.
     paired_arg_dict = {
+        "-tau_a": np.array([np.inf, 5.0, 5.0]),
+        "-tau_p": np.array([5.0, np.inf, 5.0]),
     }
 
 
@@ -136,7 +143,7 @@ if __name__ == "__main__":
     # rigidity (see e.g. Bi et al NatPhys (2015)
     # https://doi.org/10.1038/nphys3471)
     p0 = np.array([
-        3.5,
+        # 3.5,
         3.8,
         ])
 
@@ -158,7 +165,7 @@ if __name__ == "__main__":
                                dir_name=outdir_stem)
 
     # Launch the simulations as separate subprocesses
-    n_cpus = 2    # Number of simultaneous processes to run, i.e
+    n_cpus = 3    # Number of simultaneous processes to run, i.e
                   # number of cores to use with each parameterization
                   # run on a separate core.
     with Pool(n_cpus) as p:

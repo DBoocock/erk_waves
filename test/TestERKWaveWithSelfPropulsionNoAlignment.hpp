@@ -74,6 +74,7 @@ class TestERKWaveWithSelfPropulsion : public AbstractCellBasedTestSuite
 public:
   void TestRunSimulation()
     {
+      std::cout << "here 1" << std::endl;
       // Vertex based simulations cannot be run in parallel
       EXIT_IF_PARALLEL;
 
@@ -235,6 +236,8 @@ public:
 	     << "check_for_internal_intersections " << std::to_string(check_for_internal_intersections) << std::endl;
       myfile.close();
 
+      std::cout << "here 2" << std::endl;
+
       // Set up the vertex model
 
       // Create a vertex mesh of regular hexagonal cells with unit
@@ -243,6 +246,8 @@ public:
       ToroidalHoneycombVertexMeshGenerator2 generator(nx, ny, init_A, noiseSD_pos);
       Toroidal2dVertexMesh* p_mesh = generator.GetToroidalMesh();
 
+      std::cout << "here 3" << std::endl;
+      
       // Add a check for overlapping cells (can happen when T1s aren't
       // properly detected.
       p_mesh->SetCheckForInternalIntersections(check_for_internal_intersections);

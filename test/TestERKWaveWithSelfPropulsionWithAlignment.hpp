@@ -122,7 +122,12 @@ public:
       double tau_p = CommandLineArguments::Instance()->GetDoubleCorrespondingToOption("-tau_p");
       // Self-propulsion neighbour alignment timescale: in units of tau_E
       double tau_a = CommandLineArguments::Instance()->GetDoubleCorrespondingToOption("-tau_a");
-
+      double tau_a_inv = 1.0/tau_a;    // tau_a=inf should get rid of
+				       // alignment but this choice
+				       // cause issues unless we pass
+				       // the inverse (1.0/inf -> 0.0) to
+				       // the model.
+      
       // Standard deviation of random noise in self-propulsion angle
       // calculated from tau_p below. Corrections corresponging to a
       // change in time-step are accounted for in the ODE system.
@@ -224,7 +229,7 @@ public:
 	     << "taue " << std::to_string(1.0) << std::endl
 	     << "taul " << std::to_string(taul) << std::endl
 	     << "tau_p " << std::to_string(tau_p) << std::endl
-	     << "tau_a " << std::to_string(tau_p) << std::endl
+	     << "tau_a " << std::to_string(tau_a) << std::endl
 	     << "eta_std " << std::to_string(eta_std) << std::endl
 	     << "F0 " << std::to_string(F0) << std::endl
 	     << "KA " << std::to_string(KA) << std::endl
@@ -308,20 +313,20 @@ public:
 	  p_cell->GetCellData()->SetItem("beta", beta);
 	  // Self-propulsion
 	  p_cell->GetCellData()->SetItem("Eta Std", eta_std);
-	  p_cell->GetCellData()->SetItem("taua", tau_a);    // Polar alignment timescale
+	  p_cell->GetCellData()->SetItem("taua_inv", tau_a_inv);    // Polar alignment timescale
 	  // The size of the timestep is used to scale the noise
 	  // variance in the SDE so that the timestep does not affect
 	  // the persistence time or the persistent random walk.
 	  p_cell->GetCellData()->SetItem("dt_ode", dt_ode);
 	  cells.push_back(p_cell);
         }
-
+      
       // Create a cell-based population object, and specify which
       // results to output to file.
       VertexBasedCellPopulation<2> cell_population(*p_mesh, cells);
       // cell_population.AddCellWriter<ErkPropulsionWriterNoAlignment>();
       cell_population.AddCellWriter<ErkPropulsionWriterWithAlignment>();
-
+      
       for (typename VertexBasedCellPopulation<2>::Iterator cell_iter = cell_population.Begin();
 	   cell_iter != cell_population.End();
 	   ++cell_iter)
@@ -333,9 +338,7 @@ public:
 
 	  // Calculate and initialize an initial value "Mean Theta"
 	  // from cell neighbours
-	  ErkPropulsionSrnModelWithAlignment* p_model = static_cast<ErkPropulsionSrnModelWithAlignment*>(cell_iter->GetSrnModel());
-	  double this_theta = p_model->GetTheta();
-	  this_theta = atan2(sin(this_theta), cos(this_theta));
+	  double this_theta = cell_iter->GetCellData()->GetItem("Theta");
 
 	  // Get the set of neighbouring location indices
 	  std::set<unsigned> neighbour_indices = cell_population.GetNeighbouringLocationIndices(*cell_iter);

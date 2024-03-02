@@ -129,8 +129,8 @@ void ErkPropulsionSrnModelWithAlignment::SetSrnParams()
   double eta_std = mpCell->GetCellData()->GetItem("Eta Std");
   mpOdeSystem->SetParameter("Eta Std", eta_std);
 
-  double taua = mpCell->GetCellData()->GetItem("taua");
-  mpOdeSystem->SetParameter("taua", taua);
+  double taua_inv = mpCell->GetCellData()->GetItem("taua_inv");
+  mpOdeSystem->SetParameter("taua_inv", taua_inv);
 
   double mean_theta = mpCell->GetCellData()->GetItem("Mean Theta");
   mpOdeSystem->SetParameter("Mean Theta", mean_theta);

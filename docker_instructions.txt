@@ -16,6 +16,8 @@ docker run -it --init --rm -v chaste_data:/home/chaste chaste/release:2021.1
 
 cd projects
 git clone https://github.com/DBoocock/erk_waves.git
+# Switch to the branch containing a model with local polar alignment
+git checkout alignment
 cd erk_waves
 # Run setup (only requires yes for cell-based component)
 python setup_project.py
@@ -36,13 +38,14 @@ ccmake ../src
 # Type 'c' to configure again 'e' to exit and 'g' to generate
 
 # Now compile the code required for running erk_waves simulations
-make TestERKWaveWithSelfPropulsionNoAlignment
-# make TestERKWaveWithSelfPropulsionWithAlignment
+# make TestERKWaveWithSelfPropulsionNoAlignment
+make TestERKWaveWithSelfPropulsionWithAlignment
 
 # Launch simulation runs using the python scripts provided
 cd ~/scripts/python
 pip install numpy
-python batch_erk_propulsion_no_alignment.py
+# python batch_erk_propulsion_no_alignment.py
+python batch_erk_propulsion_with_alignment.py
 
 # You should a clock running and simulation output should appear in the location ~/testoutput/
 

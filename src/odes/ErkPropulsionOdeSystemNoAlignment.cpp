@@ -83,8 +83,8 @@ void ErkPropulsionOdeSystemNoAlignment::EvaluateYDerivatives(double time, const 
   double a = this->mParameters[2];
   double b = this->mParameters[3];
   double eta_std = this->mParameters[4];    // persistence time is equal to sqrt(1/eta_std)
-  // TODO Figure out how to access the dt of the ode/srn model and use
-  // that instead of assigning to each cell's CellData.
+  // TODO: Figure out how to access the dt of the ode/srn model and
+  // use that instead of assigning to each cell's CellData.
   double dt_ode = this->mParameters[5];
 
   // Random kicks in angle. Stochastic differential equation so dtheta
@@ -93,7 +93,6 @@ void ErkPropulsionOdeSystemNoAlignment::EvaluateYDerivatives(double time, const 
   // persistence time tp = 2/<eta^2> - see eq4 in Boocock et al (2023)
   // 10.1101/2023.03.24.534111.
   rDY[0] = eta_std*sqrt(2)*sqrt(1/dt_ode)*(RandomNumberGenerator::Instance()->StandardNormalRandomDeviate());    // d[theta]/dt
-
   // -E^3 stabilizing non-linearity
   rDY[1] = -erk - pow(erk, 3.0) + b*(area-1.0);    // d[Erk]/dt
   rDY[2] = ((1.0-target_area) - a*erk) / taul;    // d[TargetArea]/dt

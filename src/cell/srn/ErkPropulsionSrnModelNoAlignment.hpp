@@ -77,7 +77,7 @@ protected:
      * happens.
      *
      * This method is called by child classes to set member variables
-     * for a daughter cell upon cell division.  Note that the parent
+     * for a daughter cell upon cell division. Note that the parent
      * SRN model will have had ResetForDivision() called just before
      * CreateSrnModel() is called, so performing an exact copy of the
      * parent is suitable behaviour. Any daughter-cell-specific

@@ -85,7 +85,7 @@ void ErkPropulsionSrnModelNoAlignment::SimulateToCurrentTime()
 void ErkPropulsionSrnModelNoAlignment::Initialise()
 {
     AbstractOdeSrnModel::Initialise(new ErkPropulsionOdeSystemNoAlignment);
-    SetSrnParams();    // Pass parameters from cell data to the OdeSystem
+    SetSrnParams();    // Pass parameters from CellData to the OdeSystem
 }
 
 void ErkPropulsionSrnModelNoAlignment::UpdateSrnAreas()

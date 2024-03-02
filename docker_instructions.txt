@@ -1,0 +1,56 @@
+# Follow these instructions to install Chaste via Docker (see the TL;DR):
+
+https://github.com/Chaste/chaste-docker?tab=readme-ov-file#tldr
+
+# E.g. to install Docker for Ubuntu (22.04) follow steps 1-3:
+
+https://docs.docker.com/desktop/install/ubuntu/#install-docker-desktop
+
+# After installing Docker you can launch it from the terminal (you might have to use sudo):
+
+docker run -it --init --rm -v chaste_data:/home/chaste chaste/release:2021.1
+
+# Once this has finished downloading you should have access to Chaste within your Docker terminal chaste@xxx:~$
+
+# Download the erk_waves user project within this terminal:
+
+cd projects
+git clone https://github.com/DBoocock/erk_waves.git
+cd erk_waves
+# Run setup (only requires yes for cell-based component)
+python setup_project.py
+# Copy the python scripts to the 'scripts' directory (we will use these after compilation to launch simulations)
+cp -r python ~/scripts
+
+# Configure and compile the erk_waves project
+
+# Change directory to the build location
+cd ~/lib
+# Configure
+ccmake ../src
+
+# Configuration steps:
+# Change CMAKE_BUILD_TYPE from 'Debug' to 'Release' (optional but should speed up runtime)
+# Type 'c' to configure 'e' to exit
+# You should now see that 'Chaste_ENABLE_project_erk_wave' has been added to the options
+# Type 'c' to configure again 'e' to exit and 'g' to generate
+
+# Now compile the code required for running erk_waves simulations
+make TestERKWaveWithSelfPropulsionNoAlignment
+# make TestERKWaveWithSelfPropulsionWithAlignment
+
+# Launch simulation runs using the python scripts provided
+cd ~/scripts/python
+pip install numpy
+python batch_erk_propulsion_no_alignment.py
+
+# You should a clock running and simulation output should appear in the location ~/testoutput/
+
+# See these instructions for copying data in and out or alternatively to save test output to the host during runtime:
+https://github.com/Chaste/chaste-docker?tab=readme-ov-file#sharing-data-between-the-host-and-container
+
+# E.g. to copy from container to host, with the docker container open in one terminal, in another terminal type the following to find the container ID (you may need to use sudo)
+docker ps
+# Replace <container_ID> in the following command with this ID in order to copy the testoutput directory from the container to your current location on the host
+docker cp <container_ID>:/home/chaste/testoutput .
+# You can then use ParaView to open results.pvd files (results_from_time_xxxx/results.pvd or .vtu files) locally on your machine

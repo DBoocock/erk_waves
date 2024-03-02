@@ -347,7 +347,7 @@ public:
 	       iter != neighbour_indices.end();
 	       ++iter)
 	    {
-	      CellPtr p_cell = rCellPopulation.GetCellUsingLocationIndex(*iter);
+	      CellPtr p_cell = cell_population.GetCellUsingLocationIndex(*iter);
 	      double neigh_theta = p_cell->GetCellData()->GetItem("Theta");
 
 	      mean_theta += sin(neigh_theta - this_theta)/neighbour_indices.size();

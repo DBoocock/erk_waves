@@ -55,8 +55,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "SelfPropulsionForce.hpp"
 #include "ErkPropulsionSrnModelWithAlignment.hpp"
 #include "ErkPropulsionModifierWithAlignment.hpp"
-#include "ErkPropulsionWriterNoAlignment.hpp"
-// #include "ErkPropulsionWriterWithAlignment.hpp"    // Will also write "Mean Theta"
+// #include "ErkPropulsionWriterNoAlignment.hpp"
+#include "ErkPropulsionWriterWithAlignment.hpp"    // Will also write "Mean Theta"
 
 #include "CommandLineArguments.hpp"
 #include <iostream>
@@ -333,11 +333,12 @@ public:
 
 	  // Calculate and initialize an initial value "Mean Theta"
 	  // from cell neighbours
+	  ErkPropulsionSrnModelWithAlignment* p_model = static_cast<ErkPropulsionSrnModelWithAlignment*>(cell_iter->GetSrnModel());
 	  double this_theta = p_model->GetTheta();
 	  this_theta = atan2(sin(this_theta), cos(this_theta));
 
 	  // Get the set of neighbouring location indices
-	  std::set<unsigned> neighbour_indices = rCellPopulation.GetNeighbouringLocationIndices(*cell_iter);
+	  std::set<unsigned> neighbour_indices = cell_population.GetNeighbouringLocationIndices(*cell_iter);
 	  // Iteratate over the this cells neighbour indices i and
 	  // calculate the "average" polarization angle among them
 	  // <sin(theta_i-theta)>.

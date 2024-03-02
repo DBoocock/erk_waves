@@ -1,1 +1,2 @@
 TestERKWaveWithSelfPropulsionNoAlignment.hpp
+TestERKWaveWithSelfPropulsionWithAlignment.hpp

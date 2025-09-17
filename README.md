@@ -1,4 +1,4 @@
-# Vertex model simulations of mechanochemical ERK waves with a persistent random walk
+# Vertex model simulations featuring ERK-density couplings and persistent random walk
 
 This software was developed using the user project template of
 Chaste. See the [User

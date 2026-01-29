@@ -44,7 +44,7 @@ cd ~/scripts/python
 pip install numpy
 python batch_erk_propulsion_no_alignment.py
 
-# You should a clock running and simulation output should appear in the location ~/testoutput/
+# You should see a clock running and simulation output should appear in the location ~/testoutput/
 
 # See these instructions for copying data in and out or alternatively to save test output to the host during runtime:
 https://github.com/Chaste/chaste-docker?tab=readme-ov-file#sharing-data-between-the-host-and-container
